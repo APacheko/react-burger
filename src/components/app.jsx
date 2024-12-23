@@ -8,11 +8,19 @@ const BASE_URL = "https://norma.nomoreparties.space/api/ingredients";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
-  const getIngredients = async () => {
+  const getIngredients = () => {
     try {
-      const res = await fetch(BASE_URL);
-      const data = await res.json();
-      setIngredients(data.data);
+      fetch(BASE_URL)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Ошибка ${res.status}`);
+        })
+        .then((res) => {
+          const data = res;
+          setIngredients(data.data);
+        });
     } catch (err) {
       console.log(err);
     }

@@ -5,23 +5,20 @@ import styles from "./burger-ingredients.module.css";
 import BurgerItem from "./burger-item/burger-item";
 import Modal from "../modals/modal";
 import IngredientDetails from "../modals/ingredient-details";
+import useModal from "../../hooks/useModal";
 
 function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = useState("bun");
-  const [openIngredientModal, setOpenIngredienModal] = useState(false);
   const [ingredientData, setIngredientData] = useState({});
+  const { isModalOpen, openModal, closeModal } = useModal(setIngredientData);
 
   const bun = ingredients.filter((item) => item.type === "bun");
   const sauce = ingredients.filter((item) => item.type === "sauce");
   const main = ingredients.filter((item) => item.type === "main");
 
-  function handleClose() {
-    setOpenIngredienModal(false);
-  }
-
-  function handleOpen(data) {
-    setOpenIngredienModal(true);
+  function getData(data) {
     setIngredientData(data);
+    openModal();
   }
 
   return (
@@ -47,7 +44,7 @@ function BurgerIngredients({ ingredients }) {
                 <BurgerItem
                   key={item._id}
                   item={item}
-                  isOpen={() => handleOpen(item)}
+                  isOpen={() => getData(item)}
                 />
               ))}
             </ul>
@@ -59,7 +56,7 @@ function BurgerIngredients({ ingredients }) {
                 <BurgerItem
                   key={item._id}
                   item={item}
-                  isOpen={() => handleOpen(item)}
+                  isOpen={() => getData(item)}
                 />
               ))}
             </ul>
@@ -71,15 +68,15 @@ function BurgerIngredients({ ingredients }) {
                 <BurgerItem
                   key={item._id}
                   item={item}
-                  isOpen={() => handleOpen(item)}
+                  isOpen={() => getData(item)}
                 />
               ))}
             </ul>
           </section>
         </div>
 
-        {openIngredientModal && (
-          <Modal title="Детали ингредиента" onClose={handleClose}>
+        {isModalOpen && (
+          <Modal title="Детали ингредиента" onClose={closeModal}>
             <IngredientDetails data={ingredientData} />
           </Modal>
         )}

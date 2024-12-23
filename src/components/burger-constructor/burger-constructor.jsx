@@ -4,7 +4,7 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import useModal from "../../hooks/useModal.js";
 import Modal from "../modals/modal";
 import OrderDetails from "../modals/order-details";
 import img from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
@@ -13,18 +13,9 @@ import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 
 function BurgerConstructor({ ingredients }) {
-  const [openOrderModal, setOpenOrderModal] = useState(false);
+  const { isModalOpen, openModal, closeModal } = useModal();
   const filling = ingredients.filter((item) => item.type !== "bun");
 
-  function handleClose() {
-    setOpenOrderModal(false);
-  }
-
-  function handleOpen() {
-    setOpenOrderModal(true);
-  }
-
-  //console.log(ingredients[1].image); почему такое обращение к image рушит приложение при перезагрузке страницы?
   return (
     <>
       <div className={`${styles.container} pt-15 pl-4`}>
@@ -66,13 +57,13 @@ function BurgerConstructor({ ingredients }) {
             htmlType="button"
             type="primary"
             size="large"
-            onClick={handleOpen}
+            onClick={openModal}
           >
             Оформить заказ
           </Button>
         </div>
-        {openOrderModal && (
-          <Modal onClose={handleClose}>
+        {isModalOpen && (
+          <Modal onClose={closeModal}>
             <OrderDetails />
           </Modal>
         )}

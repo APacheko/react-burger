@@ -8,7 +8,7 @@ function OrderDetails() {
         034536
       </p>
       <p className="text text_type_main-default pb-15">идентификатор заказа</p>
-      <img src={orderImage} />
+      <img alt="Статус заказ" src={orderImage} />
       <p className="text text_type_main-default pt-15 pb-2">
         Ваш заказ начали готовить
       </p>
