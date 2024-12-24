@@ -10,7 +10,7 @@ import useModal from "../../hooks/useModal";
 function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = useState("bun");
   const [ingredientData, setIngredientData] = useState({});
-  const { isModalOpen, openModal, closeModal } = useModal(setIngredientData);
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const bun = ingredients.filter((item) => item.type === "bun");
   const sauce = ingredients.filter((item) => item.type === "sauce");
