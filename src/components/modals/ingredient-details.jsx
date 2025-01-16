@@ -1,7 +1,11 @@
-import PropTypes from "prop-types";
-import styles from "./ingredinet-details.module.css";
 
-function IngredientDetails({ data }) {
+import styles from "./ingredinet-details.module.css";
+import { useSelector } from "react-redux";
+import { getIngredient } from "../../services/details/details-slice";
+
+function IngredientDetails() {
+ 
+  const data = useSelector(getIngredient)
   return (
     <div className={`${styles.container} pb-15`}>
       <img alt={data.name} src={data.image_large} />
@@ -32,8 +36,6 @@ function IngredientDetails({ data }) {
   );
 }
 
-IngredientDetails.propTypes = {
-  data: PropTypes.object,
-};
+
 
 export default IngredientDetails;

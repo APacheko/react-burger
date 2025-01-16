@@ -26,11 +26,3 @@
 .ingredients::-webkit-scrollbar-thumb {
   background-color: #8585AD;
 }
-
-.list {
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
-  gap: 32px 0;
-  list-style: none;
-}
