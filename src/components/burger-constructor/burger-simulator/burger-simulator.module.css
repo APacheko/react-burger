@@ -1,0 +1,8 @@
+.simulator {
+  background-color: #2f2f37;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 536px;
+  height: 80px;
+}

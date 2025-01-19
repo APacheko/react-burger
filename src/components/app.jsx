@@ -1,42 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import styles from "./app.module.css";
 import AppHeader from "./app-header/app-header";
 import BurgerIngredients from "./burger-ingredients/burger-ingredients";
 import BurgerConstructor from "./burger-constructor/burger-constructor";
-
-const BASE_URL = "https://norma.nomoreparties.space/api/ingredients";
+import { getIngredientsThunk } from "../services/ingredients/ingredients-slice";
+import { useDispatch } from "react-redux";
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
-
-  const getIngredients = () => {
-      fetch(BASE_URL)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${res.status}`);
-        })
-        .then((res) => {
-          const data = res;
-          setIngredients(data.data);
-        })
-        .catch(err => {
-          console.log(err); 
-        });
-       
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getIngredients();
+    dispatch(getIngredientsThunk());
   }, []);
 
   return (
     <>
       <AppHeader />
       <main className={`${styles.main} pt-10`}>
-        <BurgerIngredients ingredients={ingredients} />
-        <BurgerConstructor ingredients={ingredients} />
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
       </main>
     </>
   );
