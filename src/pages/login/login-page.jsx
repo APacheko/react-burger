@@ -13,7 +13,8 @@ function LoginPage() {
   const dispatch = useDispatch();
   const { stateForm, handleChange } = useForm();
   
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(loginUserThunk(stateForm));
   };
 

@@ -9,7 +9,8 @@ function ForgotPage() {
   const { stateForm, handleChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     forgot(stateForm)
       .then(() => {
         localStorage.setItem("resetPassword", "true");

@@ -21,11 +21,19 @@ function Profile() {
     setIsChange(true);
   };
 
+  function handleKeyUp(e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      e.target.blur();
+    }
+   }
+
   useEffect(() => {
     setStateForm(user);
   }, [user]);
 
-  const handleUpdateUser = () => {
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
     dispatch(updateUserDataThunk(stateForm));
     setIsChange(false);
   };
@@ -36,7 +44,7 @@ function Profile() {
   };
 
   return (
-    <form>
+    <form onSubmit={handleUpdateUser}>
       <Input
         name="name"
         icon="EditIcon"
@@ -46,6 +54,7 @@ function Profile() {
         value={stateForm.name || ""}
         placeholder={"Имя"}
         onChange={updataChange}
+        onKeyUp={handleKeyUp}
       />
       <EmailInput
         name="email"
@@ -55,6 +64,7 @@ function Profile() {
         value={stateForm.email || ""}
         placeholder="Логин"
         onChange={updataChange}
+        onKeyUp={handleKeyUp}
       />
       <PasswordInput
         name="password"
@@ -64,6 +74,7 @@ function Profile() {
         placeholder="Пароль"
         icon="EditIcon"
         onChange={updataChange}
+        onKeyUp={handleKeyUp}
       />
       {isChange && (
         <div className={styles.container_btn}>
@@ -76,12 +87,11 @@ function Profile() {
             Отменить
           </Button>
           <Button
-            htmlType="button"
+            htmlType="submit"
             type="primary"
             size="large"
-            onClick={handleUpdateUser}
           >
-            Сохраниь
+            Сохранить
           </Button>
         </div>
       )}

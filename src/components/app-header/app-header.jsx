@@ -45,7 +45,10 @@ function AppHeader() {
               )}
             </NavLink>
           </div>
-          <Logo className="mr-30" />
+          <NavLink  to="/" className="mr-30">
+            <Logo />
+          </NavLink>
+
           <NavLink to="/profile" className={`${styles.link} mr-5 ml-20`}>
             {({ isActive }) => (
               <>

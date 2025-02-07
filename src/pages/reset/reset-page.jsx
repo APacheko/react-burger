@@ -12,7 +12,8 @@ function ResetPage() {
   const { stateForm, handleChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     resetPassword(stateForm)
       .then(() => {
         localStorage.removeItem("resetPassword");

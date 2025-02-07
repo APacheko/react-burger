@@ -14,7 +14,8 @@ function RegistrationPage() {
   const dispatch = useDispatch();
   const { stateForm, handleChange } = useForm();
 
-  const handleSubmit = async () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(registrationUserThunk(stateForm));
   };
 
