@@ -15,3 +15,12 @@ image {
     0 0 6px #4C4CFF,
     0 0 11px #4C4CFF;
 }
+
+.error {
+  font-size: 36px;
+  text-shadow:
+    0 0 2px #4C4CFF,
+    0 0 6px #4C4CFF,
+    0 0 11px #4C4CFF;
+    margin-bottom: 60px;
+}

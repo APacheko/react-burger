@@ -1,0 +1,38 @@
+.not_found {
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.not_found__title {
+  text-shadow:
+    0 0 7px #4C4CFF,
+    0 0 17px #4C4CFF,
+    0 0 27px #4C4CFF;
+  margin: 0;
+  font-size: 240px;
+  margin-bottom: 5px;
+}
+
+.not_found__subtitle {
+  text-shadow:
+    0 0 2px #4C4CFF,
+    0 0 6px #4C4CFF,
+    0 0 11px #4C4CFF;
+  margin: 0;
+  font-size: 36px;
+  margin-bottom: 80px;
+}
+
+.not_found__link {
+  text-shadow:
+    0 0 1px #ff4ca3,
+    0 0 3px #ff4ca3,
+    0 0 7px #ff4ca3;
+  text-decoration: none;
+  font-size: 26px;
+  color: #4285F4;
+}

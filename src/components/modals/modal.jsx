@@ -8,7 +8,6 @@ import { useEffect } from "react";
 const modalRoot = document.getElementById("react-modals");
 
 function Modal({ children, title, onClose }) {
-
   useEffect(() => {
     function handleClose(evt) {
       if (evt.code === "Escape") {
@@ -16,9 +15,9 @@ function Modal({ children, title, onClose }) {
       }
     }
     document.addEventListener("keyup", handleClose);
-      return () => {
-        document.removeEventListener("keyup", handleClose)
-      }
+    return () => {
+      document.removeEventListener("keyup", handleClose);
+    };
   }, [onClose]);
   return createPortal(
     <>
@@ -33,7 +32,6 @@ function Modal({ children, title, onClose }) {
       </article>
       <ModalOverlay onClose={onClose} />
     </>,
-
     modalRoot
   );
 }

@@ -1,0 +1,34 @@
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: start;
+  width: 1280px;
+  padding-top: 120px;
+}
+
+.nav {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8585AD;
+  height: 64px;
+}
+
+.link_active {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #F2F2F3;
+  height: 64px;
+}

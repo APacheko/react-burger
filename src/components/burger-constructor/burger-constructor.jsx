@@ -8,6 +8,8 @@ import BurgerConstructorItem from "./burger-constructor-item.jsx";
 import Modal from "../modals/modal";
 import OrderDetails from "../modals/order-details";
 import styles from "./burger-constructor.module.css";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../services/auth/auth-slice.js";
 import { useDrop } from "react-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -25,10 +27,11 @@ import { useMemo } from "react";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const ingredients = useSelector(ingredientsConstructor);
   const isOpenModal = useSelector(getIsOpenModal);
-
   const bun = useSelector(bunConstructor);
+  const { user } = useSelector(getUser);
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
@@ -50,9 +53,17 @@ function BurgerConstructor() {
   );
 
   const submitOrder = () => {
-    dispatch(
-      postOrderThunk([bun._id, ...ingredients.map((item) => item._id), bun._id])
-    );
+    if (user) {
+      dispatch(
+        postOrderThunk([
+          bun._id,
+          ...ingredients.map((item) => item._id),
+          bun._id,
+        ])
+      );
+    } else {
+      return navigate("/login");
+    }
   };
 
   const removeData = () => {
