@@ -2,22 +2,15 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef, useMemo } from "react";
 import styles from "./burger-ingredients.module.css";
 import IngredientCategory from "./ingredients-category/ingredients-category";
-import Modal from "../modals/modal";
-import IngredientDetails from "../modals/ingredient-details";
 import useModal from "../../hooks/useModal";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getIngredients } from "../../services/ingredients/ingredients-slice";
-import {
-  addIngredientData,
-  removeIngredientData,
-} from "../../services/details/details-slice";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("bun");
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   const ingredients = useSelector(getIngredients);
-  const dispatch = useDispatch();
 
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
@@ -69,16 +62,6 @@ function BurgerIngredients() {
     }
   };
 
-  function removeData() {
-    dispatch(removeIngredientData());
-    closeModal();
-  }
-
-  function getData(data) {
-    dispatch(addIngredientData(data));
-    openModal();
-  }
-
   return (
     <>
       <div className={`${styles.container}  mr-10`}>
@@ -102,27 +85,21 @@ function BurgerIngredients() {
             refs={bunsRef}
             title="Булки"
             ingredients={buns}
-            isOpen={getData}
+            isOpen={openModal}
           />
           <IngredientCategory
             refs={saucesRef}
             title="Соусы"
             ingredients={sauces}
-            isOpen={getData}
+            isOpen={openModal}
           />
           <IngredientCategory
             refs={mainsRef}
             title="Начинки"
             ingredients={mains}
-            isOpen={getData}
+            isOpen={openModal}
           />
         </div>
-
-        {isModalOpen && (
-          <Modal title="Детали ингредиента" onClose={removeData}>
-            <IngredientDetails />
-          </Modal>
-        )}
       </div>
     </>
   );

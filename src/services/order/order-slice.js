@@ -8,10 +8,7 @@ export const initialState = {
   error: null,
 };
 
-export const postOrderThunk = createAsyncThunk(
-  "order/getOrder",
-  async (dataId) => await postOrder(dataId)
-);
+export const postOrderThunk = createAsyncThunk("order/getOrder", postOrder);
 
 export const orderSlice = createSlice({
   name: "order",
@@ -23,13 +20,14 @@ export const orderSlice = createSlice({
     },
   },
   selectors: {
-    getOrderData: (state) => state.order,
+    getOrderData: (state) => state,
     getIsOpenModal: (state) => state.isOpenModal,
   },
   extraReducers: (builder) => {
     builder
       .addCase(postOrderThunk.fulfilled, (state, action) => {
         state.order = action.payload;
+        state.loading = false;
       })
       .addCase(postOrderThunk.rejected, (state, action) => {
         state.error = action.error?.message;

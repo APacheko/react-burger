@@ -5,33 +5,64 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
+import { NavLink } from "react-router-dom";
+import { getUser } from "../../services/auth/auth-slice";
+import { useSelector } from "react-redux";
 
 function AppHeader() {
+  const { user } = useSelector(getUser);
   return (
     <header className={`${styles.header} mt-10`}>
       <div className={styles.header_container}>
         <nav className={`${styles.nav} mt-5 mb-5`}>
           <div className={styles.nav_container}>
-            <a href="/" className={`${styles.link} mr-5 ml-5`}>
-              <BurgerIcon type="primary" />
-              <p className="text text_type_main-default pl-2 pr-2">
-                Конструктор
-              </p>
-            </a>
-            <a href="/" className={`${styles.link} mr-5 ml-5`}>
-              <ListIcon type="primary" />
-              <p className="text text_type_main-default text_color_inactive pl-2">
-                Лента заказов
-              </p>
-            </a>
+            <NavLink to="/" className={`${styles.link} mr-5 ml-5`}>
+              {({ isActive }) => (
+                <>
+                  <BurgerIcon type={isActive ? "primary" : "secondary"} />
+                  <p
+                    className={`text text_type_main-default pl-2 ${
+                      isActive ? "" : "text_color_inactive"
+                    }`}
+                  >
+                    Конструктор
+                  </p>
+                </>
+              )}
+            </NavLink>
+            <NavLink to="/lenta" className={`${styles.link} mr-5 ml-5`}>
+              {({ isActive }) => (
+                <>
+                  <ListIcon type={isActive ? "primary" : "secondary"} />
+                  <p
+                    className={`text text_type_main-default pl-2 ${
+                      isActive ? "" : "text_color_inactive"
+                    }`}
+                  >
+                    Лента заказов
+                  </p>
+                </>
+              )}
+            </NavLink>
           </div>
-          <Logo className="mr-30" />
-          <a href="/" className={`${styles.link} mr-5 ml-20`}>
-            <ProfileIcon type="primary" />
-            <p className="text text_type_main-default text_color_inactive pl-2">
-              Личный кабинет
-            </p>
-          </a>
+          <NavLink  to="/" className="mr-30">
+            <Logo />
+          </NavLink>
+
+          <NavLink to="/profile" className={`${styles.link} mr-5 ml-20`}>
+            {({ isActive }) => (
+              <>
+                <ProfileIcon type={isActive ? "primary" : "secondary"} />
+                <p
+                  className={`text text_type_main-default pl-2 ${
+                    isActive ? "" : "text_color_inactive"
+                  }`}
+                >
+                  {user ? user.name : "Личный кабинет"}
+                </p>
+              </>
+            )}
+          </NavLink>
         </nav>
       </div>
     </header>

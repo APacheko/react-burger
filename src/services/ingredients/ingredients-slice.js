@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getIngredientsThunk = createAsyncThunk(
   "ingredints/getIngredients",
-  async () => await getIngredientsApi()
+  getIngredientsApi
 );
 
 export const initialState = {
@@ -23,6 +23,7 @@ export const ingredientsSlice = createSlice({
     builder
       .addCase(getIngredientsThunk.fulfilled, (state, action) => {
         state.ingredients = action.payload;
+        state.loading = false;
       })
       .addCase(getIngredientsThunk.rejected, (state, action) => {
         state.error = action.error?.message;
