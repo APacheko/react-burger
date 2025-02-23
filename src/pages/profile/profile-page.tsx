@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./profile-page.module.css";
-import { logoutUserThunk } from "../../services/auth/auth-slice";
+import { logoutUserThunk } from "../../services/auth/auth-slice.js";
 
 function ProfilePage() {
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ function ProfilePage() {
             История заказов
           </NavLink>
           <NavLink
+            to=""
             onClick={logout}
             className={`${styles.link} text text_type_main-medium text_color_inactive`}
           >
@@ -51,4 +52,5 @@ function ProfilePage() {
     </main>
   );
 }
+
 export default ProfilePage;

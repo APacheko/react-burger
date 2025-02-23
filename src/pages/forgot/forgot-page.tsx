@@ -1,15 +1,15 @@
-import useForm from "../../hooks/useForm.js";
-import { forgot } from "../../utils/api.js";
-import Form from "../../components/form/form";
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
+import Form from "../../components/form/form.js";
+import useForm from "../../hooks/useForm.js";
+import { forgot } from "../../utils/api.js";
 import styles from "../pages.module.css";
 
 function ForgotPage() {
   const { stateForm, handleChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     forgot(stateForm)
       .then(() => {

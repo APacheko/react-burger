@@ -1,8 +1,15 @@
-import PropTypes from "prop-types";
 import styles from "./form.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ReactNode, FormEvent } from "react";
 
-function Form({ title, textBtn, onSubmit, children }) {
+type Props = {
+  title: string;
+  textBtn: string;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  children: ReactNode;
+};
+
+function Form({ title, textBtn, onSubmit, children }: Props) {
   return (
     <div className={styles.container}>
       <h1 className="text text_type_main-medium mb-6">{title}</h1>
@@ -20,13 +27,5 @@ function Form({ title, textBtn, onSubmit, children }) {
     </div>
   );
 }
-
-Form.propTypes = {
-  title: PropTypes.string,
-  textBtn: PropTypes.string,
-  children: PropTypes.any,
-  onSubmit: PropTypes.func,
-  error: PropTypes.bool,
-};
 
 export default Form;
