@@ -6,10 +6,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
 import { NavLink } from "react-router-dom";
-import { getUser } from "../../services/auth/auth-slice";
+import { getUser } from "../../services/auth/auth-slice.js";
 import { useSelector } from "react-redux";
 
 function AppHeader() {
+  //@ts-ignore.
   const { user } = useSelector(getUser);
   return (
     <header className={`${styles.header} mt-10`}>
@@ -45,7 +46,7 @@ function AppHeader() {
               )}
             </NavLink>
           </div>
-          <NavLink  to="/" className="mr-30">
+          <NavLink to="/" className="mr-30">
             <Logo />
           </NavLink>
 

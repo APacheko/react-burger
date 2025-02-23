@@ -1,12 +1,13 @@
 import styles from "./order-datails.module.css";
 import orderImage from "../../images/done.png";
 import Preloader from "../preloader/preloader";
-import { getOrderData } from "../../services/order/order-slice";
+import { getOrderData } from "../../services/order/order-slice.js";
 import { useSelector, useDispatch } from "react-redux";
-import { clearConstructor } from "../../services/constructor/constructor-slice";
+import { clearConstructor } from "../../services/constructor/constructor-slice.js";
 import { useEffect } from "react";
 
 function OrderDetails() {
+  //@ts-ignore.
   const { order, error, loading } = useSelector(getOrderData);
   const dispatch = useDispatch();
 
@@ -37,7 +38,7 @@ function OrderDetails() {
           </p>
         </div>
       )}
-      {loading && <Preloader/>}
+      {loading && <Preloader />}
       {error && <div className={styles.error}>{error}</div>}
     </>
   );

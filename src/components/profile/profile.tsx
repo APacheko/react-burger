@@ -8,31 +8,36 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
-import { getUser, updateUserDataThunk } from "../../services/auth/auth-slice";
+import {
+  getUser,
+  updateUserDataThunk,
+} from "../../services/auth/auth-slice.js";
 
 function Profile() {
+  //@ts-ignore.
   const { user } = useSelector(getUser);
   const dispatch = useDispatch();
   const { stateForm, setStateForm, handleChange } = useForm();
   const [isChange, setIsChange] = useState(false);
 
-  const updataChange = (e) => {
+  const updataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
     setIsChange(true);
   };
 
-  function handleKeyUp(e) {
-    if (e.keyCode === 13) {
+  function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.code === "Enter") {
       e.preventDefault();
-      e.target.blur();
+      const target = e.target as HTMLInputElement;
+      target.blur();
     }
-   }
+  }
 
   useEffect(() => {
     setStateForm(user);
   }, [user]);
 
-  const handleUpdateUser = (e) => {
+  const handleUpdateUser = (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(updateUserDataThunk(stateForm));
     setIsChange(false);
@@ -86,11 +91,7 @@ function Profile() {
           >
             Отменить
           </Button>
-          <Button
-            htmlType="submit"
-            type="primary"
-            size="large"
-          >
+          <Button htmlType="submit" type="primary" size="large">
             Сохранить
           </Button>
         </div>

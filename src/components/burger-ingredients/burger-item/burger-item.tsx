@@ -2,25 +2,30 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import styles from "./burger-item.module.css";
 import { useDrag } from "react-dnd";
 import {
   ingredientsConstructor,
   bunConstructor,
-} from "../../../services/constructor/constructor-slice";
+} from "../../../services/constructor/constructor-slice.js";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { IIngredientObj } from "../../../utils/type.js";
 
-function BurgerItem({ item, isOpen }) {
+interface IBurgerItem {
+  item: IIngredientObj;
+  isOpen: () => void;
+}
+
+function BurgerItem({ item, isOpen }: IBurgerItem) {
   const location = useLocation();
   const { _id, name, type, price, image } = item;
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: { _id, name, type, price, image },
   });
-  const bun = useSelector(bunConstructor);
-  const ingredients = useSelector(ingredientsConstructor);
+  const bun: IIngredientObj = useSelector(bunConstructor);
+  const ingredients: IIngredientObj[] = useSelector(ingredientsConstructor);
   const count = ingredients.filter((element) => item._id === element._id);
 
   return (
@@ -54,10 +59,5 @@ function BurgerItem({ item, isOpen }) {
     </li>
   );
 }
-
-BurgerItem.propTypes = {
-  item: PropTypes.object,
-  isOpen: PropTypes.func,
-};
 
 export default BurgerItem;

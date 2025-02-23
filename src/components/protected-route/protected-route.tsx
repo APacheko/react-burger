@@ -1,9 +1,14 @@
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-import { getUser } from "../../services/auth/auth-slice";
+import { getUser } from "../../services/auth/auth-slice.js";
 
-const ProtectedRouteElement = ({ onlyUnAuth = false, component }) => {
+type Props = {
+  onlyUnAuth?: boolean;
+  component: JSX.Element;
+};
+
+const ProtectedRouteElement = ({ onlyUnAuth = false, component }: Props) => {
+  //@ts-ignore.
   const { user, isAuthChecked } = useSelector(getUser);
   const location = useLocation();
 
@@ -24,15 +29,6 @@ const ProtectedRouteElement = ({ onlyUnAuth = false, component }) => {
 };
 
 export const OnlyAuth = ProtectedRouteElement;
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth = ({ component }: Props) => (
   <ProtectedRouteElement onlyUnAuth={true} component={component} />
 );
-
-OnlyUnAuth.propTypes = {
-  component: PropTypes.element,
-};
-
-ProtectedRouteElement.propTypes = {
-  component: PropTypes.element,
-  onlyUnAuth: PropTypes.bool,
-};

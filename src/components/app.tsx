@@ -4,7 +4,7 @@ import AppHeader from "./app-header/app-header";
 import Profile from "./profile/profile";
 import Preloader from "./preloader/preloader";
 import IngredientDetails from "./modals/ingredient-details";
-import { checkUserAuth } from "../services/auth/auth-slice";
+import { checkUserAuth } from "../services/auth/auth-slice.js";
 import { OnlyAuth, OnlyUnAuth } from "./protected-route/protected-route";
 import {
   LoginPage,
@@ -15,25 +15,24 @@ import {
   ProfilePage,
   IngredientPage,
   NotFound,
-} from "../pages/pages";
-import { getIngredientsThunk } from "../services/ingredients/ingredients-slice";
+} from "../pages/pages.tsx";
+import { getIngredientsThunk } from "../services/ingredients/ingredients-slice.js";
 import { useDispatch } from "react-redux";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./modals/modal";
 import useModal from "../hooks/useModal";
 
-
 function App() {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const background = location.state && location.state.background;
 
   function close() {
     closeModal();
-    navigate(-1)
+    navigate(-1);
   }
 
   useEffect(() => {
@@ -49,7 +48,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<MainPage />} />
-        <Route path="/ingredients/:id" element={<IngredientPage />} /> 
+        <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route
           path="/profile"
           element={<OnlyAuth component={<ProfilePage />} />}

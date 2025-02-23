@@ -1,5 +1,5 @@
 import useForm from "../../hooks/useForm.js";
-import Form from "../../components/form/form";
+import Form from "../../components/form/form.js";
 import {
   EmailInput,
   PasswordInput,
@@ -12,8 +12,8 @@ import { loginUserThunk } from "../../services/auth/auth-slice.js";
 function LoginPage() {
   const dispatch = useDispatch();
   const { stateForm, handleChange } = useForm();
-  
-  const handleSubmit = (e) => {
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginUserThunk(stateForm));
   };

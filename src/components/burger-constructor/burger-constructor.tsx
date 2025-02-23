@@ -3,10 +3,10 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerSimulator from "./burger-simulator/burger-simulator.jsx";
-import BurgerConstructorItem from "./burger-constructor-item.jsx";
-import Modal from "../modals/modal";
-import OrderDetails from "../modals/order-details";
+import BurgerSimulator from "./burger-simulator/burger-simulator.js";
+import BurgerConstructorItem from "./burger-constructor-item.js";
+import Modal from "../modals/modal.js";
+import OrderDetails from "../modals/order-details.js";
 import styles from "./burger-constructor.module.css";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../services/auth/auth-slice.js";
@@ -24,13 +24,17 @@ import {
   getIsOpenModal,
 } from "../../services/order/order-slice.js";
 import { useMemo } from "react";
+import { IIngredientObj } from "../../utils/type.js";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const ingredients = useSelector(ingredientsConstructor);
-  const isOpenModal = useSelector(getIsOpenModal);
-  const bun = useSelector(bunConstructor);
+
+  const ingredients: IIngredientObj[] = useSelector(ingredientsConstructor);
+  const isOpenModal: Function = useSelector(getIsOpenModal);
+
+  const bun: IIngredientObj = useSelector(bunConstructor);
+  //@ts-ignore.
   const { user } = useSelector(getUser);
 
   const [, dropTarget] = useDrop({
@@ -40,12 +44,12 @@ function BurgerConstructor() {
     },
   });
 
-  const moveListElement = (dragIndex, hoverIndex) =>
+  const moveListElement = (dragIndex: number, hoverIndex: number) =>
     dispatch(switchIngredient({ dragIndex, hoverIndex }));
 
-  const countTotalCost = (bun, ingredients) =>
+  const countTotalCost = (bun: IIngredientObj, ingredients: IIngredientObj[]) =>
     (bun ? bun.price * 2 : 0) +
-    ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0);
+    ingredients.reduce((acc: number, ingredient) => acc + ingredient.price, 0);
 
   const totalCost = useMemo(
     () => countTotalCost(bun, ingredients),
