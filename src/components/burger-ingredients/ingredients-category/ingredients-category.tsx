@@ -1,9 +1,16 @@
 import styles from "./ingredients-category.module.css";
 import BurgerItem from "../burger-item/burger-item";
-import PropTypes from "prop-types";
+import { IIngredientObj } from "../../../utils/type";
+import { RefObject } from "react";
 
-function IngredientCategory({ ingredients, title, isOpen, refs }) {
+type Props = {
+  ingredients: IIngredientObj[];
+  title: string;
+  isOpen: (item: IIngredientObj) => void;
+  refs: RefObject<HTMLParagraphElement>;
+};
 
+function IngredientCategory({ ingredients, title, isOpen, refs }: Props) {
   return (
     <section>
       <p ref={refs} className="text_type_main-medium">
@@ -17,12 +24,5 @@ function IngredientCategory({ ingredients, title, isOpen, refs }) {
     </section>
   );
 }
-
-IngredientCategory.propTypes = {
-  ingredients: PropTypes.array,
-  title: PropTypes.string,
-  refs: PropTypes.any,
-  isOpen: PropTypes.func,
-};
 
 export default IngredientCategory;

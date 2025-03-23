@@ -1,12 +1,13 @@
 import styles from "./ingredinet-details.module.css";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { getIngredients } from "../../services/ingredients/ingredients-slice";
+import { getIngredients } from "../../services/ingredients/ingredients-slice.js";
 import { useParams } from "react-router-dom";
+import { IIngredientObj } from "../../utils/type.js";
 
 function IngredientDetails() {
   const { id } = useParams();
-  const ingredients = useSelector(getIngredients);
+  const ingredients: IIngredientObj[] = useSelector(getIngredients);
   const ingredient = useMemo(() => {
     return ingredients.find((item) => item._id === id);
   }, [ingredients, id]);

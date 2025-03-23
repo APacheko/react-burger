@@ -1,16 +1,17 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, RefObject } from "react";
 import styles from "./burger-ingredients.module.css";
 import IngredientCategory from "./ingredients-category/ingredients-category";
 import useModal from "../../hooks/useModal";
 import { useSelector } from "react-redux";
-import { getIngredients } from "../../services/ingredients/ingredients-slice";
+import { getIngredients } from "../../services/ingredients/ingredients-slice.js";
+import { IIngredientObj } from "../../utils/type.js";
 
 function BurgerIngredients() {
-  const [current, setCurrent] = useState("bun");
+  const [current, setCurrent] = useState<string>("bun");
   const { openModal } = useModal();
 
-  const ingredients = useSelector(getIngredients);
+  const ingredients: IIngredientObj[] = useSelector(getIngredients);
 
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
@@ -25,10 +26,10 @@ function BurgerIngredients() {
     [ingredients]
   );
 
-  const tabsRef = useRef(null);
-  const bunsRef = useRef(null);
-  const saucesRef = useRef(null);
-  const mainsRef = useRef(null);
+  const tabsRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const bunsRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const saucesRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const mainsRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
     if (

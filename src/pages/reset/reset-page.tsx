@@ -1,5 +1,5 @@
 import useForm from "../../hooks/useForm.js";
-import Form from "../../components/form/form";
+import Form from "../../components/form/form.js";
 import {
   PasswordInput,
   Input,
@@ -12,7 +12,7 @@ function ResetPage() {
   const { stateForm, handleChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     resetPassword(stateForm)
       .then(() => {
@@ -50,7 +50,6 @@ function ResetPage() {
           extraClass="mb-6"
           value={stateForm.token || ""}
           placeholder={"Введите код из письма"}
-          icon="undefined"
           onChange={handleChange}
         />
       </Form>

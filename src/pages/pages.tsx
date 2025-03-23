@@ -7,4 +7,13 @@ import ProfilePage from "./profile/profile-page";
 import NotFound from "./not-found/not-found";
 import IngredientPage from "./ingredient/ingredient-page";
 
-export { LoginPage, RegistrationPage, ForgotPage, ResetPage, MainPage, ProfilePage, NotFound, IngredientPage };
+export {
+  LoginPage,
+  RegistrationPage,
+  ForgotPage,
+  ResetPage,
+  MainPage,
+  ProfilePage,
+  NotFound,
+  IngredientPage,
+};
