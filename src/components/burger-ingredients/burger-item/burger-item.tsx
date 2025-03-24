@@ -7,10 +7,10 @@ import { useDrag } from "react-dnd";
 import {
   ingredientsConstructor,
   bunConstructor,
-} from "../../../services/constructor/constructor-slice.js";
-import { useSelector } from "react-redux";
+} from "../../../services/constructor/constructor-slice.ts";
+import { useAppSelector } from "../../../services/store.ts";
 import { Link, useLocation } from "react-router-dom";
-import { IIngredientObj } from "../../../utils/type.js";
+import { IIngredientObj } from "../../../utils/type.tsx";
 
 interface IBurgerItem {
   item: IIngredientObj;
@@ -24,8 +24,8 @@ function BurgerItem({ item, isOpen }: IBurgerItem) {
     type: "ingredient",
     item: { _id, name, type, price, image },
   });
-  const bun: IIngredientObj = useSelector(bunConstructor);
-  const ingredients: IIngredientObj[] = useSelector(ingredientsConstructor);
+  const bun = useAppSelector(bunConstructor);
+  const ingredients = useAppSelector(ingredientsConstructor);
   const count = ingredients.filter((element) => item._id === element._id);
 
   return (

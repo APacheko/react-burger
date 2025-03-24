@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 type TProfileFormInputs = {
-  name?: string | null;
-  email?: string | null;
-  password?: string | null;
-  token?: string | null;
+  name?: string | null | undefined;
+  email?: string | null | undefined ;
+  password?: string ;
+  token?: string ;
 };
 
 const useForm = () => {

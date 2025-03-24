@@ -3,12 +3,12 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../services/store.ts"; 
 import { deleteIngredientConstructor } from "../../services/constructor/constructor-slice.js";
 import { useDrag, useDrop } from "react-dnd";
 import type { XYCoord } from "dnd-core";
 import { useRef } from "react";
-import { IIngredientObj } from "../../utils/type.js";
+import { IIngredientObj } from "../../utils/type.tsx";
 
 interface IBurgerConstructorItem {
   item: IIngredientObj;
@@ -21,7 +21,7 @@ function BurgerConstructorItem({
   moveListItem,
   index,
 }: IBurgerConstructorItem) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ref = useRef<HTMLLIElement>(null);
 
   const [{ isDrag }, dragRef] = useDrag({

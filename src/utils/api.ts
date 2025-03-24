@@ -1,25 +1,10 @@
-import { IUser } from "./type";
-
 const baseUrl = "https://norma.nomoreparties.space/api";
 
-type TErr = {
-  success: boolean;
-  message: string;
-};
-
-interface FetchOptions extends RequestInit {
-  headers: {
-    [key: string]: string;
-  };
-}
-
 const checkResult = (res: Response) => {
-  return res.ok
-    ? res.json()
-    : res.json().then((err: TErr) => Promise.reject(err));
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-const request = (url: string, options: FetchOptions) => {
+const request = (url: string, options: object) => {
   return fetch(baseUrl + url, options).then(checkResult);
 };
 
@@ -33,14 +18,14 @@ export const refreshToken = () => {
   });
 };
 
-export const fetchWithRefresh = async (url: string, options: FetchOptions) => {
+export const fetchWithRefresh = async (url: string, options: any) => {
   try {
     const res = await fetch(baseUrl + url, options);
     return await checkResult(res);
   } catch (err) {
-    if (err instanceof Error && err.message === "jwt expired") {
+    if (!String(err).includes("jwt expired")) {
       const refreshData = await refreshToken();
-      if (!refreshData.success) {
+      if (!refreshData.succes) {
         Promise.reject(refreshData);
       }
       localStorage.setItem("refreshToken", refreshData.refreshToken);
@@ -59,7 +44,7 @@ export const getUserData = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: localStorage.getItem("accessToken")!,
+      authorization: localStorage.getItem("accessToken"),
     },
   });
 };
@@ -75,12 +60,12 @@ export const getIngredientsApi = () => {
   });
 };
 
-export const postOrder = (dataId: string[]) => {
+export const postOrder = (dataId: string) => {
   return fetchWithRefresh("/orders", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      authorization: localStorage.getItem("accessToken")!,
+      authorization: localStorage.getItem("accessToken"),
     },
     body: JSON.stringify({
       ingredients: dataId,
@@ -88,7 +73,7 @@ export const postOrder = (dataId: string[]) => {
   });
 };
 
-export const register = (data: IUser) => {
+export const register = (data: object) => {
   return request("/auth/register", {
     method: "POST",
     headers: {
@@ -102,7 +87,7 @@ export const register = (data: IUser) => {
   });
 };
 
-export const login = (data: IUser) => {
+export const login = (data: object) => {
   return request("/auth/login", {
     method: "POST",
     headers: {
@@ -116,12 +101,12 @@ export const login = (data: IUser) => {
   });
 };
 
-export const updateUserData = (data: IUser) => {
+export const updateUserData = (data: object) => {
   return fetchWithRefresh("/auth/user", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: localStorage.getItem("accessToken")!,
+      authorization: localStorage.getItem("accessToken"),
     },
     body: JSON.stringify(data),
   });
@@ -157,5 +142,16 @@ export const resetPassword = (data: object) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+  });
+};
+
+export const getOrderByNumber = (number: number) => {
+  return request(`/orders/${number}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((data) => {
+    return data;
   });
 };

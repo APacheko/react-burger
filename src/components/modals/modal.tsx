@@ -8,8 +8,8 @@ const modalRoot = document.getElementById("react-modals") as HTMLElement;
 
 type Props = {
   title?: string;
-  onClose: () => void;
   children: ReactNode;
+  onClose: () => void;
 };
 
 function Modal({ children, title, onClose }: Props) {

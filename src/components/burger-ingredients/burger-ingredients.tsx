@@ -3,15 +3,15 @@ import { useState, useRef, useMemo, RefObject } from "react";
 import styles from "./burger-ingredients.module.css";
 import IngredientCategory from "./ingredients-category/ingredients-category";
 import useModal from "../../hooks/useModal";
-import { useSelector } from "react-redux";
-import { getIngredients } from "../../services/ingredients/ingredients-slice.js";
-import { IIngredientObj } from "../../utils/type.js";
+import { useAppSelector } from "../../services/store.ts";
+import { getIngredients } from "../../services/ingredients/ingredients-slice.ts";
+import { IIngredientObj } from "../../utils/type.tsx";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState<string>("bun");
   const { openModal } = useModal();
 
-  const ingredients: IIngredientObj[] = useSelector(getIngredients);
+  const ingredients: IIngredientObj[] = useAppSelector(getIngredients);
 
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),

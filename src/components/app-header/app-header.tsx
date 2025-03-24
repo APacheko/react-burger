@@ -6,11 +6,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
 import { NavLink } from "react-router-dom";
-import { getUser } from "../../services/auth/auth-slice.js";
+import { getUser } from "../../services/auth/auth-slice.ts";
 import { useSelector } from "react-redux";
 
 function AppHeader() {
-  //@ts-ignore.
   const { user } = useSelector(getUser);
   return (
     <header className={`${styles.header} mt-10`}>
@@ -31,7 +30,7 @@ function AppHeader() {
                 </>
               )}
             </NavLink>
-            <NavLink to="/lenta" className={`${styles.link} mr-5 ml-5`}>
+            <NavLink to="/feed" className={`${styles.link} mr-5 ml-5`}>
               {({ isActive }) => (
                 <>
                   <ListIcon type={isActive ? "primary" : "secondary"} />

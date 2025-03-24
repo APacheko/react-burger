@@ -26,8 +26,29 @@ export interface IBurger {
 }
 
 export interface IUser {
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  password?: string;
+  token?: string;
+}
+
+export interface IOrder {
+  _id: string;
+  createdAt: string;
+  ingredients: [];
   name: string;
-  email: string;
-  password: string;
-  token: string;
+  number: number;
+  status: 'created' | 'pending' | 'done';
+  updatedAt: string;
+}
+
+export type TWsConnect = {
+  url: string
+  token?: string
+}
+
+export enum EOrderStatus {
+  created = "created",
+  pending = "pending",
+  done = "done"
 }

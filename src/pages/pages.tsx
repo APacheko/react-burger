@@ -6,6 +6,7 @@ import MainPage from "./main/main-page";
 import ProfilePage from "./profile/profile-page";
 import NotFound from "./not-found/not-found";
 import IngredientPage from "./ingredient/ingredient-page";
+import FeedPage from "./feed/feed-page";
 
 export {
   LoginPage,
@@ -16,4 +17,5 @@ export {
   ProfilePage,
   NotFound,
   IngredientPage,
+  FeedPage
 };
