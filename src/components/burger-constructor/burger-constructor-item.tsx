@@ -4,7 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import { useAppDispatch } from "../../services/store.ts"; 
-import { deleteIngredientConstructor } from "../../services/constructor/constructor-slice.js";
+import { deleteIngredientConstructor } from "../../services/constructor/constructor-slice.ts";
 import { useDrag, useDrop } from "react-dnd";
 import type { XYCoord } from "dnd-core";
 import { useRef } from "react";

@@ -1,6 +1,6 @@
 import {StrictMode} from "react";
 import {createRoot} from "react-dom/client";
-import App from "./components/app.js";
+import App from "./components/app.tsx";
 import "./main.css";
 import {store} from "./services/store.ts";
 import {Provider} from "react-redux";

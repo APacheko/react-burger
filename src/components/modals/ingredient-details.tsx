@@ -1,14 +1,13 @@
 import styles from "./ingredinet-details.module.css";
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/store.ts";
 import { getIngredients } from "../../services/ingredients/ingredients-slice.ts";
 import { useParams } from "react-router-dom";
-import { IIngredientObj } from "../../utils/type.js";
 
 function IngredientDetails() {
   const { id } = useParams();
   console.log(id)
-  const ingredients: IIngredientObj[] = useSelector(getIngredients);
+  const ingredients = useAppSelector(getIngredients);
   const ingredient = useMemo(() => {
     return ingredients.find((item) => item._id === id);
   }, [ingredients, id]);

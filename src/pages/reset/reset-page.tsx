@@ -1,11 +1,11 @@
-import useForm from "../../hooks/useForm.js";
-import Form from "../../components/form/form.js";
+import useForm from "../../hooks/useForm.ts";
+import Form from "../../components/form/form.tsx";
 import {
   PasswordInput,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { resetPassword } from "../../utils/api.js";
+import { resetPassword } from "../../utils/api.ts";
 import styles from "../pages.module.css";
 
 function ResetPage() {

@@ -1,11 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../services/store.ts"; 
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./profile-page.module.css";
-import { logoutUserThunk } from "../../services/auth/auth-slice.js";
+import { logoutUserThunk } from "../../services/auth/auth-slice.ts";
 
 function ProfilePage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

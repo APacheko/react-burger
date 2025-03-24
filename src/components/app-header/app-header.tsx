@@ -7,10 +7,10 @@ import {
 import styles from "./app-header.module.css";
 import { NavLink } from "react-router-dom";
 import { getUser } from "../../services/auth/auth-slice.ts";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/store.ts"; 
 
 function AppHeader() {
-  const { user } = useSelector(getUser);
+  const { user } = useAppSelector(getUser);
   return (
     <header className={`${styles.header} mt-10`}>
       <div className={styles.header_container}>
