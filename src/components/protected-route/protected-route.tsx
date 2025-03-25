@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/store.ts";
 import { Navigate, useLocation } from "react-router-dom";
-import { getUser } from "../../services/auth/auth-slice.js";
+import { getUser } from "../../services/auth/auth-slice.ts";
 
 type Props = {
   onlyUnAuth?: boolean;
@@ -8,8 +8,7 @@ type Props = {
 };
 
 const ProtectedRouteElement = ({ onlyUnAuth = false, component }: Props) => {
-  //@ts-ignore.
-  const { user, isAuthChecked } = useSelector(getUser);
+  const { user, isAuthChecked } = useAppSelector(getUser);
   const location = useLocation();
 
   if (!isAuthChecked) {

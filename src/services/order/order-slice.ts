@@ -1,7 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { postOrder } from "../../utils/api";
+import { IOrder } from "../../utils/type";
 
-export const initialState = {
+interface IinitialState {
+  order: IOrder | null;
+  isOpenModal: boolean;
+  loading: boolean
+  error: string | null,
+}
+
+export const initialState: IinitialState = {
   order: null,
   isOpenModal: false,
   loading: false,
@@ -26,11 +34,11 @@ export const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(postOrderThunk.fulfilled, (state, action) => {
-        state.order = action.payload;
+        state.order = action.payload.order;
         state.loading = false;
       })
       .addCase(postOrderThunk.rejected, (state, action) => {
-        state.error = action.error?.message;
+        state.error = String(action.error?.message)
         state.loading = false;
       })
       .addCase(postOrderThunk.pending, (state) => {

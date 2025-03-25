@@ -6,6 +6,7 @@ import {
   logout,
 } from "../../utils/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../../utils/type";
 
 export const registrationUserThunk = createAsyncThunk(
   "auth/registrationUser",
@@ -35,7 +36,15 @@ export const checkUserAuth = createAsyncThunk(
   }
 );
 
-export const initialState = {
+interface IinitialState {
+  user: IUser | null,
+  loading: boolean,
+  error: string | null;
+  isAuthChecked: boolean,
+}
+
+
+export const initialState: IinitialState = {
   user: null,
   loading: false,
   error: null,
@@ -62,8 +71,8 @@ export const authSlice = createSlice({
         state.user = action.payload;
         state.loading = false;
       })
-      .addCase(registrationUserThunk.rejected, (state, action) => {
-        state.error = action.error?.message;
+      .addCase(registrationUserThunk.rejected, (state, action ) => {
+        state.error = String(action.error?.message);
         state.loading = false;
       })
       .addCase(registrationUserThunk.pending, (state) => {
@@ -75,19 +84,23 @@ export const authSlice = createSlice({
         state.isAuthChecked = true;
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
-        state.error = action.error?.message;
+        state.error = String(action.error?.message);
         state.loading = false;
       })
       .addCase(loginUserThunk.pending, (state) => {
         state.loading = true;
       })
       .addCase(updateUserDataThunk.fulfilled, (state, action) => {
-        state.user.name = action.payload.user.name;
-        state.user.email = action.payload.user.email;
+        if (state.user) {
+          state.user.name = action.payload.user.name;
+          state.user.email = action.payload.user.email;
+        } else {
+          console.warn('User is not initialized');
+        }
         state.loading = false;
       })
       .addCase(updateUserDataThunk.rejected, (state, action) => {
-        state.error = action.error?.message;
+        state.error = String(action.error?.message);
         state.loading = false;
       })
       .addCase(updateUserDataThunk.pending, (state) => {
@@ -98,7 +111,7 @@ export const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(logoutUserThunk.rejected, (state, action) => {
-        state.error = action.error?.message;
+        state.error = String(action.error?.message);
         state.loading = false;
       })
       .addCase(logoutUserThunk.pending, (state) => {

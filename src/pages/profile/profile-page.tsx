@@ -1,12 +1,13 @@
-import { useDispatch } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../services/store.ts"; 
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./profile-page.module.css";
-import { logoutUserThunk } from "../../services/auth/auth-slice.js";
+import { logoutUserThunk } from "../../services/auth/auth-slice.ts";
 
 function ProfilePage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const logout = () => {
     dispatch(logoutUserThunk());
@@ -44,7 +45,9 @@ function ProfilePage() {
             Выход
           </NavLink>
           <p className="text text_type_main-default text_color_inactive mt-20">
-            В этом разделе вы можете изменить свои персональные данные
+            {pathname === "/profile/orders"
+              ? "В этом разделе вы можете просмотреть свою историю заказов"
+              : "В этом разделе вы можете изменить свои персональные данные"}
           </p>
         </nav>
         <Outlet />

@@ -3,39 +3,55 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerSimulator from "./burger-simulator/burger-simulator.js";
-import BurgerConstructorItem from "./burger-constructor-item.js";
-import Modal from "../modals/modal.js";
-import OrderDetails from "../modals/order-details.js";
+import BurgerSimulator from "./burger-simulator/burger-simulator.tsx";
+import BurgerConstructorItem from "./burger-constructor-item.tsx";
+import Modal from "../modals/modal.tsx";
+import OrderDetails from "../modals/order-details.tsx";
 import styles from "./burger-constructor.module.css";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../services/auth/auth-slice.js";
+import { getUser } from "../../services/auth/auth-slice.ts";
 import { useDrop } from "react-dnd";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/store.ts"; 
 import {
   ingredientsConstructor,
   bunConstructor,
   addIngredintConstructor,
   switchIngredient,
-} from "../../services/constructor/constructor-slice.js";
+} from "../../services/constructor/constructor-slice.ts";
 import {
   postOrderThunk,
   deleteOrderData,
   getIsOpenModal,
-} from "../../services/order/order-slice.js";
+} from "../../services/order/order-slice.ts";
 import { useMemo } from "react";
-import { IIngredientObj } from "../../utils/type.js";
+import { IIngredientObj } from "../../utils/type.ts";
+
+interface IIngredient {
+  _id: string;
+  name: string;
+  type: string | undefined;
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
+  calories: number;
+  price: number;
+  image: string;
+  image_mobile: string;
+  image_large: string;
+  __v: number;
+  uuid?: string;
+}
 
 function BurgerConstructor() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const ingredients: IIngredientObj[] = useSelector(ingredientsConstructor);
-  const isOpenModal: Function = useSelector(getIsOpenModal);
+  const ingredients = useAppSelector(ingredientsConstructor);
+  const isOpenModal = useAppSelector(getIsOpenModal);
 
-  const bun: IIngredientObj = useSelector(bunConstructor);
-  //@ts-ignore.
-  const { user } = useSelector(getUser);
+  const bun = useAppSelector(bunConstructor);
+  
+  const { user } = useAppSelector(getUser);
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
@@ -47,7 +63,7 @@ function BurgerConstructor() {
   const moveListElement = (dragIndex: number, hoverIndex: number) =>
     dispatch(switchIngredient({ dragIndex, hoverIndex }));
 
-  const countTotalCost = (bun: IIngredientObj, ingredients: IIngredientObj[]) =>
+  const countTotalCost = (bun: IIngredient | null, ingredients: IIngredientObj[]) =>
     (bun ? bun.price * 2 : 0) +
     ingredients.reduce((acc: number, ingredient) => acc + ingredient.price, 0);
 
@@ -58,17 +74,21 @@ function BurgerConstructor() {
 
   const submitOrder = () => {
     if (user) {
-      dispatch(
-        postOrderThunk([
-          bun._id,
-          ...ingredients.map((item) => item._id),
-          bun._id,
-        ])
-      );
+      if (bun) {
+        dispatch(
+          postOrderThunk([
+            bun._id,
+            ...ingredients.map((item) => item._id),
+            bun._id,
+          ])
+        );
+      } else {
+        console.error("Ошибка")
+      }
     } else {
-      return navigate("/login");
+      navigate("/login");
     }
-  };
+};
 
   const removeData = () => {
     dispatch(deleteOrderData());

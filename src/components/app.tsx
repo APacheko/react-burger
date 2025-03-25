@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-
+import OrderHistory from "./order-history/order-history.tsx";
 import AppHeader from "./app-header/app-header";
 import Profile from "./profile/profile";
-import Preloader from "./preloader/preloader";
 import IngredientDetails from "./modals/ingredient-details";
-import { checkUserAuth } from "../services/auth/auth-slice.js";
+import OrderInfo from "./modals/order-info.tsx";
+import { checkUserAuth } from "../services/auth/auth-slice.ts";
 import { OnlyAuth, OnlyUnAuth } from "./protected-route/protected-route";
 import {
   LoginPage,
@@ -15,16 +15,17 @@ import {
   ProfilePage,
   IngredientPage,
   NotFound,
+  FeedPage,
 } from "../pages/pages.tsx";
-import { getIngredientsThunk } from "../services/ingredients/ingredients-slice.js";
-import { useDispatch } from "react-redux";
+import { getIngredientsThunk } from "../services/ingredients/ingredients-slice.ts";
+import { useAppDispatch } from "../services/store.ts"; 
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./modals/modal";
 import useModal from "../hooks/useModal";
 
 function App() {
   const { closeModal } = useModal();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -48,13 +49,17 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<MainPage />} />
+        <Route path="/feed" element={<FeedPage />} />
+        <Route path="/feed/:number" element={<OrderInfo />} />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
+        <Route path="/profile/orders/:number" element={<OrderInfo />} />
         <Route
           path="/profile"
           element={<OnlyAuth component={<ProfilePage />} />}
         >
           <Route path="/profile" element={<Profile />} />
-          <Route path="orders" element={<Preloader />} />
+          <Route path="orders" element={<OrderHistory />} />
+          
         </Route>
         <Route
           path="/profile"
@@ -86,6 +91,22 @@ function App() {
             element={
               <Modal title="Детали ингредиента" onClose={close}>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path="/feed/:number"
+            element={
+              <Modal onClose={close}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path="/profile/orders/:number"
+            element={
+              <Modal onClose={close}>
+                <OrderInfo />
               </Modal>
             }
           />

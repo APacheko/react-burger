@@ -1,16 +1,16 @@
-import useForm from "../../hooks/useForm.js";
-import Form from "../../components/form/form.js";
+import useForm from "../../hooks/useForm.ts";
+import Form from "../../components/form/form.tsx";
 import {
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import styles from "../pages.module.css";
-import { useDispatch } from "react-redux";
-import { loginUserThunk } from "../../services/auth/auth-slice.js";
+import { useAppDispatch } from "../../services/store.ts";
+import { loginUserThunk } from "../../services/auth/auth-slice.ts";
 
 function LoginPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { stateForm, handleChange } = useForm();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

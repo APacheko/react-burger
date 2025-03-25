@@ -1,16 +1,15 @@
 import styles from "./order-datails.module.css";
 import orderImage from "../../images/done.png";
 import Preloader from "../preloader/preloader";
-import { getOrderData } from "../../services/order/order-slice.js";
-import { useSelector, useDispatch } from "react-redux";
-import { clearConstructor } from "../../services/constructor/constructor-slice.js";
+import { getOrderData } from "../../services/order/order-slice.ts";
+import { useAppDispatch, useAppSelector } from "../../services/store.ts"; 
+import { clearConstructor } from "../../services/constructor/constructor-slice.ts";
 import { useEffect } from "react";
 
 function OrderDetails() {
-  //@ts-ignore.
-  const { order, error, loading } = useSelector(getOrderData);
-  const dispatch = useDispatch();
-
+  const { order, error, loading } = useAppSelector(getOrderData);
+  const dispatch = useAppDispatch();
+ 
   useEffect(() => {
     if (order) {
       dispatch(clearConstructor());
@@ -24,7 +23,7 @@ function OrderDetails() {
           <p
             className={`${styles.order} text text_type_digits-large pt-20 pb-10`}
           >
-            {order.order.number}
+            {order.number}
           </p>
           <p className="text text_type_main-default pb-15">
             идентификатор заказа

@@ -1,9 +1,9 @@
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
-import Form from "../../components/form/form.js";
-import useForm from "../../hooks/useForm.js";
-import { forgot } from "../../utils/api.js";
-import styles from "../pages.module.css";
+import Form from "../../components/form/form.tsx";
+import useForm from "../../hooks/useForm.ts";
+import { forgot } from "../../utils/api.ts";
+import styles from "../pages.module.css"
 
 function ForgotPage() {
   const { stateForm, handleChange } = useForm();

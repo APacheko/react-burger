@@ -1,6 +1,6 @@
 import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/store.ts"; 
 import {
   Input,
   EmailInput,
@@ -11,12 +11,11 @@ import styles from "./profile.module.css";
 import {
   getUser,
   updateUserDataThunk,
-} from "../../services/auth/auth-slice.js";
+} from "../../services/auth/auth-slice.ts";
 
 function Profile() {
-  //@ts-ignore.
-  const { user } = useSelector(getUser);
-  const dispatch = useDispatch();
+  const { user } = useAppSelector(getUser);
+  const dispatch = useAppDispatch();
   const { stateForm, setStateForm, handleChange } = useForm();
   const [isChange, setIsChange] = useState(false);
 
@@ -34,7 +33,9 @@ function Profile() {
   }
 
   useEffect(() => {
-    setStateForm(user);
+    if (user) {
+      setStateForm(user)
+    }
   }, [user]);
 
   const handleUpdateUser = (e: React.SyntheticEvent) => {
@@ -44,7 +45,9 @@ function Profile() {
   };
 
   const cancelChange = () => {
-    setStateForm(user);
+    if (user) {
+      setStateForm(user);
+    }
     setIsChange(false);
   };
 

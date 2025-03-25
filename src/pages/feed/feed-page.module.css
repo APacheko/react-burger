@@ -1,0 +1,50 @@
+.main {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.container {
+  display: flex;
+}
+
+.orders_container {
+  margin-top: 20px;
+  padding-left: 76px;
+  display: flex;
+  flex-direction: column;
+}
+
+.status_container {
+  display: flex;
+}
+
+.orders_done {
+  color: #00CCCC;
+}
+
+.orders_list {
+  width: 272px;
+  height: 180px;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  flex-wrap: wrap;
+}
+
+.order {
+  text-shadow:
+    0 0 2px #4C4CFF,
+    0 0 6px #4C4CFF,
+    0 0 11px #4C4CFF;
+}
+
+.error {
+  font-size: 36px;
+  text-shadow:
+    0 0 2px #4C4CFF,
+    0 0 6px #4C4CFF,
+    0 0 11px #4C4CFF;
+  margin-bottom: 60px;
+}

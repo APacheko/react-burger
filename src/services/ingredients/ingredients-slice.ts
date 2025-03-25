@@ -1,12 +1,19 @@
 import { getIngredientsApi } from "../../utils/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IIngredientObj } from "../../utils/type";
+
+interface IinitialState {
+  ingredients: IIngredientObj[],
+  loading: boolean;
+  error: string | null;
+}
 
 export const getIngredientsThunk = createAsyncThunk(
   "ingredints/getIngredients",
   getIngredientsApi
 );
 
-export const initialState = {
+export const initialState: IinitialState = {
   ingredients: [],
   loading: false,
   error: null,
@@ -26,7 +33,7 @@ export const ingredientsSlice = createSlice({
         state.loading = false;
       })
       .addCase(getIngredientsThunk.rejected, (state, action) => {
-        state.error = action.error?.message;
+        state.error = action.error.message || null;
         state.loading = false;
       })
       .addCase(getIngredientsThunk.pending, (state) => {

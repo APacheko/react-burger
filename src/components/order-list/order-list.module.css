@@ -1,0 +1,23 @@
+.list {
+    list-style-type: none;
+    margin: 20px;
+    padding: 0;
+    max-width: 844px;
+    max-height: 870px;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: #8585AD #2F2F37;
+  }
+  
+  .list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .list::-webkit-scrollbar-track {
+    background-color: #2F2F37
+  }
+  
+  .list::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+  }
