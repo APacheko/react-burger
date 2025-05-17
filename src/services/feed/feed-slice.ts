@@ -16,7 +16,7 @@ interface IWsResponse {
   totalToday: number;
 }
 
-const initialState: IinitialState = {
+export const initialState: IinitialState = {
   connected: false,
   orders: null,
   total: 0,
@@ -67,4 +67,5 @@ export const {
 } = feedSlice.actions;
 
 export const { getOrders, getTotal, getTotalToday } = feedSlice.selectors;
+export default feedSlice.reducer;
 

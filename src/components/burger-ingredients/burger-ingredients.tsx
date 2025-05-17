@@ -83,18 +83,21 @@ function BurgerIngredients() {
           className={`${styles.ingredients} mt-10`}
         >
           <IngredientCategory
+            test="bun"
             refs={bunsRef}
             title="Булки"
             ingredients={buns}
             isOpen={openModal}
           />
           <IngredientCategory
+          test="sauce"
             refs={saucesRef}
             title="Соусы"
             ingredients={sauces}
             isOpen={openModal}
           />
           <IngredientCategory
+            test="main"
             refs={mainsRef}
             title="Начинки"
             ingredients={mains}

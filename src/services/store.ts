@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './rootReducer.js';
 import { useDispatch, useSelector } from "react-redux";
 import { wsConnecting, wsError, wsMessage, wsOpen, wsClose} from './feed/feed-slice.ts';
-import { wsHistoryConnecting, wsHistoryError, wsHistoryMessage, wsHistoryOpen, wsHistoryClose} from './history/history-slice.ts';
+import { wsHistoryError, wsHistoryMessage, wsHistoryOpen, wsHistoryClose} from './history/history-slice.ts';
 import { wsConnect, wsDisconnect } from './feed/actions.ts';
 import { wsHistoryConnect, wsHistoryDisconnect } from './history/actions.ts';
 import { socketMiddleware } from './socketMiddleware.ts';

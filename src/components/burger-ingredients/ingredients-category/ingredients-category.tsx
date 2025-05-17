@@ -8,9 +8,10 @@ type Props = {
   title: string;
   isOpen: (item: IIngredientObj) => void;
   refs: RefObject<HTMLParagraphElement>;
+  test: string;
 };
 
-function IngredientCategory({ ingredients, title, isOpen, refs }: Props) {
+function IngredientCategory({ ingredients, title, isOpen, refs, test }: Props) {
   return (
     <section>
       <p ref={refs} className="text_type_main-medium">
@@ -18,7 +19,7 @@ function IngredientCategory({ ingredients, title, isOpen, refs }: Props) {
       </p>
       <ul className={styles.list}>
         {ingredients.map((item) => (
-          <BurgerItem key={item._id} item={item} isOpen={() => isOpen(item)} />
+          <BurgerItem key={item._id} test={test} item={item} isOpen={() => isOpen(item)} />
         ))}
       </ul>
     </section>

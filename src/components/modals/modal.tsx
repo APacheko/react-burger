@@ -31,7 +31,9 @@ function Modal({ children, title, onClose }: Props) {
           <h2 className={`${styles.title} text text_type_main-large `}>
             {title}
           </h2>
+          <div data-test="modal-close-button">
           <CloseIcon onClick={onClose} type="primary" />
+          </div>
         </div>
         <div className={styles.content}>{children}</div>
       </article>

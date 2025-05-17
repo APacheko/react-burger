@@ -97,9 +97,9 @@ function BurgerConstructor() {
   return (
     <>
       <div ref={dropTarget} className={`${styles.container} pt-15 pl-4`}>
-        <ul className={styles.list}>
+        <ul className={styles.list} data-test="constructor">
           {bun ? (
-            <ConstructorElement
+            <ConstructorElement 
               type="top"
               isLocked={true}
               text={bun.name + "(верх)"}
@@ -150,6 +150,7 @@ function BurgerConstructor() {
             <CurrencyIcon type="primary" />
           </div>
           <Button
+            data-test="submit"
             htmlType="button"
             type="primary"
             size="large"

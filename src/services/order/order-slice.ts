@@ -50,3 +50,4 @@ export const orderSlice = createSlice({
 
 export const { getOrderData, getIsOpenModal } = orderSlice.selectors;
 export const { deleteOrderData } = orderSlice.actions;
+export default orderSlice.reducer;
