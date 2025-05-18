@@ -60,9 +60,9 @@ function BurgerConstructorItem({
   dragRef(dropRef(ref));
 
   return (
-    <div className={styles.item_container}>
+    <div  className={styles.item_container}>
       <DragIcon className="mr-2 mb-2" type="primary" />
-      <li
+      <li data-test="constructor-item"
         style={{ opacity: isDrag ? 0 : 1 }}
         ref={ref}
         className={`${styles.list_item} `}

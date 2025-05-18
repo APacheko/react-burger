@@ -20,7 +20,7 @@ function OrderDetails() {
     <>
       {order && (
         <div className={styles.container}>
-          <p
+          <p data-test="order-number"
             className={`${styles.order} text text_type_digits-large pt-20 pb-10`}
           >
             {order.number}

@@ -3,6 +3,8 @@ const testObjects = {
   sauce: '[data-test="sauce"]',
   main: '[data-test="main"]',
   constructor: '[data-test="constructor"]',
+  constructorBun: '[data-test="constructor-bun"]',
+  constructorItem: '[data-test="constructor-item"]',
 };
 
 describe("template spec", () => {
@@ -19,9 +21,12 @@ describe("template spec", () => {
   it("Drag and drop", () => {
     cy.get("@bun").eq(0).trigger("dragstart");
     cy.get(testObjects.constructor).trigger("drop");
+    cy.get(testObjects.constructorBun).contains('Краторная булка N-200i');
     cy.get("@sauce").eq(0).trigger("dragstart");
     cy.get(testObjects.constructor).trigger("drop");
+    cy.get(testObjects.constructorItem).contains('Соус Spicy-X');
     cy.get("@main").eq(0).trigger("dragstart");
     cy.get(testObjects.constructor).trigger("drop");
+    cy.get(testObjects.constructorItem).contains('Биокотлета из марсианской Магнолии');
   });
 });

@@ -5,7 +5,8 @@ const testObjects = {
   calories: '[data-test="calories"]',
   proteins: '[data-test="proteins"]',
   fat: '[data-test="fat"]',
-  carbohydrates: '[data-test="carbohydrates"]'
+  carbohydrates: '[data-test="carbohydrates"]',
+  modal: '[data-test="modal"]',
 };
 
 describe("Order modal", () => {
@@ -16,11 +17,13 @@ describe("Order modal", () => {
 
   it("open order modal", () => {
     cy.get(testObjects.bun).eq(0).click();
+    cy.get(testObjects.modal).should('exist');
     cy.get(testObjects.ingredientName).contains('Краторная булка N-200i');
     cy.get(testObjects.calories).contains("420");
     cy.get(testObjects.proteins).contains("80");
     cy.get(testObjects.fat).contains("24");
     cy.get(testObjects.carbohydrates).contains("53");
     cy.get(testObjects.modalClose).click();
+    cy.get(testObjects.modal).should('not.exist');
   });
 });

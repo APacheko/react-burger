@@ -26,7 +26,7 @@ function Modal({ children, title, onClose }: Props) {
   }, [onClose]);
   return createPortal(
     <>
-      <article className={styles.modal}>
+      <article data-test="modal" className={styles.modal}>
         <div className={`${styles.container} pt-15 pr-10 pl-10`}>
           <h2 className={`${styles.title} text text_type_main-large `}>
             {title}

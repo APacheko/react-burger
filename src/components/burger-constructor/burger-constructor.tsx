@@ -99,6 +99,7 @@ function BurgerConstructor() {
       <div ref={dropTarget} className={`${styles.container} pt-15 pl-4`}>
         <ul className={styles.list} data-test="constructor">
           {bun ? (
+            <div data-test="constructor-bun">
             <ConstructorElement 
               type="top"
               isLocked={true}
@@ -106,6 +107,7 @@ function BurgerConstructor() {
               price={bun.price}
               thumbnail={bun.image}
             />
+            </div>
           ) : (
             <BurgerSimulator
               style="88px 88px 40px 40px"
