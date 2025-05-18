@@ -122,3 +122,4 @@ export const authSlice = createSlice({
 
 export const { getUser } = authSlice.selectors;
 export const { setAuthChecked, setUser } = authSlice.actions;
+export default authSlice.reducer;

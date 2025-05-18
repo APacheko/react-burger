@@ -26,12 +26,14 @@ function Modal({ children, title, onClose }: Props) {
   }, [onClose]);
   return createPortal(
     <>
-      <article className={styles.modal}>
+      <article data-test="modal" className={styles.modal}>
         <div className={`${styles.container} pt-15 pr-10 pl-10`}>
           <h2 className={`${styles.title} text text_type_main-large `}>
             {title}
           </h2>
+          <div data-test="modal-close-button">
           <CloseIcon onClick={onClose} type="primary" />
+          </div>
         </div>
         <div className={styles.content}>{children}</div>
       </article>

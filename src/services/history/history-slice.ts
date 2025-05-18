@@ -12,7 +12,7 @@ interface IWsResponse {
   orders: IOrder[];
 }
 
-const initialState: IinitialState = {
+export const initialState: IinitialState = {
   connected: false,
   orders: null,
   error: null,
@@ -59,3 +59,4 @@ export const {
 } = historySlice.actions;
 
 export const { getHistory,} = historySlice.selectors;
+export default historySlice.reducer;

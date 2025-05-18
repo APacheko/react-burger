@@ -13,11 +13,12 @@ import { Link, useLocation } from "react-router-dom";
 import { IIngredientObj } from "../../../utils/type.tsx";
 
 interface IBurgerItem {
+  test: string;
   item: IIngredientObj;
   isOpen: () => void;
 }
 
-function BurgerItem({ item, isOpen }: IBurgerItem) {
+function BurgerItem({ item, isOpen, test }: IBurgerItem) {
   const location = useLocation();
   const { _id, name, type, price, image } = item;
   const [, dragRef] = useDrag({
@@ -31,6 +32,7 @@ function BurgerItem({ item, isOpen }: IBurgerItem) {
   return (
     <li ref={dragRef} className={styles.list_item} onClick={isOpen}>
       <Link
+        data-test={test}
         to={`/ingredients/${_id}`}
         state={{ background: location }}
         className={styles.list_item}

@@ -33,7 +33,7 @@ export const ingredientsSlice = createSlice({
         state.loading = false;
       })
       .addCase(getIngredientsThunk.rejected, (state, action) => {
-        state.error = action.error.message || null;
+        state.error = String(action.error?.message)
         state.loading = false;
       })
       .addCase(getIngredientsThunk.pending, (state) => {
@@ -43,3 +43,4 @@ export const ingredientsSlice = createSlice({
 });
 
 export const { getIngredients } = ingredientsSlice.selectors;
+export default ingredientsSlice.reducer;

@@ -16,31 +16,31 @@ function IngredientDetails() {
   return (
     <div className={`${styles.container} pb-15`}>
       <img alt={ingredient.name} src={ingredient.image_large} />
-      <h3 className="text text_type_main-medium pt-5 pb-10">
+      <h3 data-test="ingredient-name" className="text text_type_main-medium pt-5 pb-10">
         {ingredient.name}
       </h3>
       <ul className={`${styles.list} text_color_inactive pb-15`}>
         <li className={`${styles.list_item} pr-15`}>
           <p className="text text_type_main-default ">Калории,ккал</p>
-          <span className="text text_type_digits-default">
+          <span data-test="calories" className="text text_type_digits-default">
             {ingredient.calories}
           </span>
         </li>
         <li className={`${styles.list_item} pr-15`}>
           <p className="text text_type_main-default ">Белки, г</p>
-          <span className="text text_type_digits-default ">
+          <span data-test="proteins" className="text text_type_digits-default ">
             {ingredient.proteins}
           </span>
         </li>
         <li className={`${styles.list_item} pr-15`}>
-          <p className="text text_type_main-default ">Жиры, г</p>
-          <span className="text text_type_digits-default">
+          <p  className="text text_type_main-default ">Жиры, г</p>
+          <span data-test="fat" className="text text_type_digits-default">
             {ingredient.fat}
           </span>
         </li>
         <li className={styles.list_item}>
           <p className="text text_type_main-default ">Углеводы, г</p>
-          <span className="text text_type_digits-default">
+          <span data-test="carbohydrates" className="text text_type_digits-default">
             {ingredient.carbohydrates}
           </span>
         </li>
